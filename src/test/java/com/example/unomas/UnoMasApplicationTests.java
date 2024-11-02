@@ -8,6 +8,7 @@ class UnoMasApplicationTests {
 
     @Test
     void contextLoads() {
+        assert true;
     }
 
 }

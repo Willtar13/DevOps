@@ -26,11 +26,11 @@ public class BitbucketStatusController {
     public String status() throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         String jsonResponse = restTemplate.getForObject("https://bitbucket.status.atlassian.com/api/v2/status.json", String.class);
-        ObjectMapper objectMapper = new ObjectMapper();
-        StatusResponse response = objectMapper.readValue(jsonResponse, StatusResponse.class);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        StatusResponse response = objectMapper.readValue(jsonResponse, StatusResponse.class);
 
         // Access fields in the response object
-        System.out.println(response.getPage().getName());
+//        System.out.println(response.getPage().getName());
         return restTemplate.getForObject("https://bitbucket.status.atlassian.com/api/v2/status.json", String.class);
     }
 
@@ -38,6 +38,30 @@ public class BitbucketStatusController {
     public String components() {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject("https://bitbucket.status.atlassian.com/api/v2/components.json", String.class);
+    }
+
+    @GetMapping("api/incidents")
+    public String incidents() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("https://bitbucket.status.atlassian.com/api/v2/incidents.json", String.class);
+    }
+
+    @GetMapping("api/incidents/unresolved")
+    public String unresolved() throws Exception {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("https://bitbucket.status.atlassian.com/api/v2/incidents/unresolved.json", String.class);
+    }
+
+    @GetMapping("api/maintenance/active")
+    public String maintenanceActive() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("https://bitbucket.status.atlassian.com/api/v2/scheduled-maintenances/active.json", String.class);
+    }
+
+    @GetMapping("api/maintenance/upcoming")
+    public String maintenanceUpcoming() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("https://bitbucket.status.atlassian.com/api/v2/scheduled-maintenances/upcoming.json", String.class);
     }
 
 }
